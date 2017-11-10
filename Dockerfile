@@ -52,8 +52,22 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     sudo apt-get install -y build-essential
 
-# check if node is working properly after merge
+# check node and npm installation
 RUN echo "Testing node installation" && node -v && npm -v
+
+# install Phantom JS 2
+RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
+    sudo apt-get install libfreetype6 libfreetype6-dev -y && \
+    sudo apt-get install libfontconfig1 libfontconfig1-dev -y && \
+
+
+RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+    sudo tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+    sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
+    sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
+
+# check pahntom instalation
+RUN echo "Testing node installation" && phantomjs --version
 
 # clean
 RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
