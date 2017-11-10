@@ -44,7 +44,7 @@ RUN echo "Testing git installation" && git --version
 RUN mkdir -p "${MAVEN_HOME}" && \
     curl -fsSL http://tux.rainside.sk/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz \
     | tar -xzC "${MAVEN_HOME}" --strip-components=1 && \
-    ln -s "${MAVEN_HOME}"/bin/mvn /usr/bin/mvn
+    ln -sf "${MAVEN_HOME}"/bin/mvn /usr/bin/mvn
   
 # check maven installation
 RUN echo "Testing maven installation" && mvn --version 
@@ -65,6 +65,8 @@ RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
 
 RUN curl -sSL https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
     | tar -xzC "${PHANTOMJS_HOME}" --strip-components=1 && \
+    ln -sf "${PHANTOMJS_HOME}"/bin/phantomjs /usr/bin/phantomjs
+    
 #    sudo tar -xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
 #    sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
 #    sudo ln -sf /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
