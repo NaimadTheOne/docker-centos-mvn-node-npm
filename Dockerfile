@@ -64,7 +64,7 @@ RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
 RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
     sudo tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
     sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
-    sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
+    sudo ln -sf /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
 
 # check pahntom instalation
 RUN echo "Testing node installation" && phantomjs --version
