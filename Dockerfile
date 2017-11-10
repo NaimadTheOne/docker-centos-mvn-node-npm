@@ -76,8 +76,8 @@ RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
 
 
 # installing angular-cli globally
-RUN echo "Installing angular-cli for global use"
-RUN npm install -g @angular/cli@1.2.7
+#RUN echo "Installing angular-cli for global use"
+#RUN npm install -g @angular/cli@1.2.7
 
 # check angular-cli installation
-RUN echo "Testing CLI installation" && ng --version     
+#RUN echo "Testing CLI installation" && ng --version     
