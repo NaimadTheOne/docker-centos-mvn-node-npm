@@ -48,7 +48,7 @@ RUN mkdir -p "${MAVEN_HOME}" && \
 RUN echo "Testing maven installation" && mvn --version 
 
 # install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
+RUN curl -sSL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     sudo apt-get install -y build-essential
 
@@ -61,8 +61,8 @@ RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
     sudo apt-get install libfontconfig1 libfontconfig1-dev -y
 
 
-RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-    sudo tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+RUN curl -sSL https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+    sudo tar -xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
     sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
     sudo ln -sf /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
 
