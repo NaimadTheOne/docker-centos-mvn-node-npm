@@ -58,7 +58,7 @@ RUN echo "Testing node installation" && node -v && npm -v
 # install Phantom JS 2
 RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
     sudo apt-get install libfreetype6 libfreetype6-dev -y && \
-    sudo apt-get install libfontconfig1 libfontconfig1-dev -y && \
+    sudo apt-get install libfontconfig1 libfontconfig1-dev -y
 
 
 RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
