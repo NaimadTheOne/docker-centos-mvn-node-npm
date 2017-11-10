@@ -56,7 +56,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
 RUN echo "Testing node installation" && node -v && npm -v
 
 # clean
-RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 sudo && \
+RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
      apt-get autoclean && apt-get --purge -y autoremove && \
      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
 
