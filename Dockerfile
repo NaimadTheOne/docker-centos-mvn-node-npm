@@ -10,6 +10,8 @@ ENV JAVA_SIG aa0333dd3019491ca4f6ddbe78cdb6d0
 
 ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-oracle
 
+ENV PHANTOMJS_HOME /usr/share/phantomjs
+
 # setup
 RUN apt-get update -qq && \
   apt-get upgrade -qqy --no-install-recommends && \
@@ -62,9 +64,10 @@ RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
 
 
 RUN curl -sSL https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-    sudo tar -xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-    sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
-    sudo ln -sf /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
+    | tar -xzC "${PHANTOMJS_HOME}" --strip-components=1 && \
+#    sudo tar -xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
+#    sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
+#    sudo ln -sf /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
 
 # check pahntom instalation
 RUN echo "Testing node installation" && phantomjs --version
