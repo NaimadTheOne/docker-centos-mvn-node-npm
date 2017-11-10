@@ -1,11 +1,3 @@
-# installing node:8 (nodejs, npm)
-FROM node:8 as NODE_SOURCE
-
-# installing angular-cli globally
-RUN echo "Installing angular-cli for global use"
-RUN npm install -g @angular/cli@1.2.7
-
-# installing gradle:4.2.1 (java jdk8, gradl 4.2.1)
 FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -37,8 +29,14 @@ RUN update-alternatives --install "/usr/bin/java" "java" "${JAVA_HOME}/bin/java"
 	update-alternatives --set javaws "${JAVA_HOME}/bin/javaws" && \
 	update-alternatives --set javac "${JAVA_HOME}/bin/javac"
 
+# check java installation
+RUN echo "Testing java installation" && java -version  
+
 # install git
 RUN apt-get install git -qqy
+
+# check git installation
+RUN echo "Testing git installation" && git --version 
 
 # install maven	
 RUN mkdir -p "${MAVEN_HOME}" && \
@@ -46,17 +44,26 @@ RUN mkdir -p "${MAVEN_HOME}" && \
     | tar -xzC "${MAVEN_HOME}" --strip-components=1 && \
     ln -s "${MAVEN_HOME}"/bin/mvn /usr/bin/mvn
   
-# clean
-RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
-     apt-get autoclean && apt-get --purge -y autoremove && \
-     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
-     
-# merge data from previous image
-COPY --from=NODE_SOURCE /usr/local/lib/node_modules /usr/local/lib/node_modules/
-COPY --from=NODE_SOURCE /usr/local/bin /usr/local/bin
+# check maven installation
+RUN echo "Testing maven installation" && mvn --version 
+
+# install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
+    apt-get install -y nodejs && \
+    apt-get install -y build-essential
 
 # check if node is working properly after merge
 RUN echo "Testing node installation" && node -v && npm -v
 
+# clean
+RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
+     apt-get autoclean && apt-get --purge -y autoremove && \
+     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
+
+
+# installing angular-cli globally
+RUN echo "Installing angular-cli for global use"
+RUN npm install -g @angular/cli@1.2.7
+
 # check angular-cli installation
-RUN ng --version     
+RUN echo "Testing CLI installation" && ng --version     
