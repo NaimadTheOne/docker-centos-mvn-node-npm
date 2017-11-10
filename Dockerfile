@@ -1,3 +1,11 @@
+# installing node:6 (nodejs, npm, yarn)
+FROM node:8 as NODE_SOURCE
+
+# installing angular-cli globally
+RUN echo "Installing angular-cli for global use"
+RUN npm install -g @angular/cli@1.2.7
+
+# installing gradle:4.2.1 (java jdk8, gradl 4.2.1)
 FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -42,3 +50,13 @@ RUN mkdir -p "${MAVEN_HOME}" && \
 RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
      apt-get autoclean && apt-get --purge -y autoremove && \
      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
+     
+# merge data from previous image
+COPY --from=NODE_SOURCE /usr/local/lib/node_modules /usr/local/lib/node_modules/
+COPY --from=NODE_SOURCE /usr/local/bin /usr/local/bin
+
+# check if node is working properly after merge
+RUN echo "Testing node installation" && node -v && npm -v
+
+# check angular-cli installation
+RUN ng --version     
