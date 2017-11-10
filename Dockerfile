@@ -49,8 +49,8 @@ RUN echo "Testing maven installation" && mvn --version
 
 # install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
-    apt-get install -y nodejs && \
-    apt-get install -y build-essential
+    sudo apt-get install -y nodejs && \
+    sudo apt-get install -y build-essential
 
 # check if node is working properly after merge
 RUN echo "Testing node installation" && node -v && npm -v
