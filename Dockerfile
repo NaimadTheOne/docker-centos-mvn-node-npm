@@ -64,7 +64,7 @@ RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
 
 
 RUN curl -sSL https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
-    | tar -xzC "${PHANTOMJS_HOME}" --strip-components=1 && \
+    | tar -xvjf "${PHANTOMJS_HOME}" --strip-components=1 && \
     ln -sf "${PHANTOMJS_HOME}"/bin/phantomjs /usr/bin/phantomjs
     
 #    sudo tar -xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
