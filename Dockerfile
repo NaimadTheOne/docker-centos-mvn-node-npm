@@ -63,7 +63,8 @@ RUN sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y && \
     sudo apt-get install libfontconfig1 libfontconfig1-dev -y
 
 
-RUN curl -sSL https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
+RUN mkdir -p "${PHANTOMJS_HOME}" && \
+    curl -sSL https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
     | tar -xjC "${PHANTOMJS_HOME}" --strip-components=1 && \
     ln -sf "${PHANTOMJS_HOME}"/bin/phantomjs /usr/bin/phantomjs
     
