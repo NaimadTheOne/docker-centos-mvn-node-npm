@@ -1,4 +1,4 @@
-# installing node:6 (nodejs, npm, yarn)
+# installing node:8 (nodejs, npm)
 FROM node:8 as NODE_SOURCE
 
 # installing angular-cli globally
