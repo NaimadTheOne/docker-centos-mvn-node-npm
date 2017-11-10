@@ -1,9 +1,4 @@
-FROM centos:7
-MAINTAINER The CentOS Project <cloud-ops@centos.org>
-LABEL Vendor="CentOS" \
-      License=GPLv2 \
-      Version=2.4.6-40
-
+FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV MAVEN_HOME /usr/share/maven
@@ -43,7 +38,7 @@ RUN mkdir -p "${MAVEN_HOME}" && \
     | tar -xzC "${MAVEN_HOME}" --strip-components=1 && \
     ln -s "${MAVEN_HOME}"/bin/mvn /usr/bin/mvn
   
-# clean unused bzip2 is requited for npm
-RUN  apt-get remove --purge --auto-remove -y curl unzip && \
+# clean
+RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
      apt-get autoclean && apt-get --purge -y autoremove && \
      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
