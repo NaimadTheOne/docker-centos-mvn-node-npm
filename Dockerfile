@@ -68,9 +68,6 @@ RUN mkdir -p "${PHANTOMJS_HOME}" && \
     | tar -xjC "${PHANTOMJS_HOME}" --strip-components=1 && \
     ln -sf "${PHANTOMJS_HOME}"/bin/phantomjs /usr/bin/phantomjs
     
-#    sudo tar -xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
-#    sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
-#    sudo ln -sf /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
 
 # check phantom instalation
 RUN echo "Testing phantom installation" && phantomjs --version
@@ -82,8 +79,8 @@ RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
 
 
 # installing angular-cli globally
-#RUN echo "Installing angular-cli for global use"
-#RUN npm install -g @angular/cli@1.2.7
+RUN echo "Installing angular-cli for global use"
+RUN npm install -g @angular/cli@1.2.7
 
 # check angular-cli installation
-#RUN echo "Testing CLI installation" && ng --version     
+RUN echo "Testing CLI installation" && ng --version     
