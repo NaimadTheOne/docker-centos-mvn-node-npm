@@ -72,8 +72,8 @@ RUN mkdir -p "${PHANTOMJS_HOME}" && \
 #    sudo mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
 #    sudo ln -sf /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
 
-# check pahntom instalation
-RUN echo "Testing node installation" && phantomjs --version
+# check phantom instalation
+RUN echo "Testing phantom installation" && phantomjs --version
 
 # clean
 RUN  apt-get remove --purge --auto-remove -y curl unzip bzip2 && \
